@@ -8,7 +8,7 @@ from model_logsss import M_Logsss
 
 app = Flask(__name__)
 v_logsss = Logsss()
-@app.route('/', methods = ['get', 'post'])
+@app.route('/', methods = ['GET', 'POST'])
 def index():
     if request.method == 'GET':
         return render_template('index.html')
@@ -18,8 +18,8 @@ def index():
                                    create_at = datetime.now(),\
                                    tags = 'test',\
                                    status = status,\
-                                   content = 'content_test')
-        return v_logsss.add_logsss(new_obj)
+                                   content = request.form['content'])
+        return str(v_logsss.add_logsss(new_obj))
     return 'nothing here'
 
 if __name__ == '__main__':
