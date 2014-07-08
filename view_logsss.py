@@ -39,11 +39,28 @@ class Logsss():
         return recorder
     def get_recorders(self):
         return session.query(M_Logsss).all()
-
+    def add_logsss(self,logsss_model):
+        is_success = False
+        try:
+            session.add(logsss_model)
+            session.commit()
+            is_success = True
+        except:
+            is_success = False
+        return is_success
+            
 
 class Test_Logsss(unittest.TestCase):
     def setUp(self):
         self.l = Logsss()
+    def test_add_logsss(self):
+        new_obj = M_Logsss(id_code = 'adfjkwqeflwqelfjl', update_at = datetime.now(),\
+                               create_at = datetime.now(),\
+                               tags = 'test',\
+                               status = content_status.draft,\
+                               content = 'content_test')
+        result = self.l.add_logsss(new_obj)
+        self.assertTrue(result)
     def test_get_draft(self):
         ids = '0'
         obj = self.l.get_draft(ids)
