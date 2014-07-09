@@ -11,7 +11,8 @@ v_logsss = Logsss()
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        content_items = v_logsss.get_recorders()
+        return render_template('index.html', content_items = content_items)
     if request.method == 'POST':
         status = request.form['status']
         new_obj = M_Logsss(id_code = 'adfjkwqeflwqelfjl', update_at = datetime.now(),\
@@ -19,7 +20,10 @@ def index():
                                    tags = 'test',\
                                    status = status,\
                                    content = request.form['content'])
-        return str(v_logsss.add_logsss(new_obj))
+        if v_logsss.add_logsss(new_obj):
+            return redirect(url_for('index'))
+        else:
+            return 'commit error'
     return 'nothing here'
 
 if __name__ == '__main__':

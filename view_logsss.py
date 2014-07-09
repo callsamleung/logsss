@@ -27,6 +27,12 @@ class Test_Content_status(unittest.TestCase):
 content_status = Content_status()
 
 class Logsss():
+    '''
+    get_draft
+    get_item
+    get_recorders
+    add_logsss
+    '''
     def __init__(self):
         pass
     def get_draft(self, identity):
@@ -38,7 +44,7 @@ class Logsss():
         recorder = session.query(M_Logsss).filter_by(id = identity).first()
         return recorder
     def get_recorders(self):
-        return session.query(M_Logsss).all()
+        return session.query(M_Logsss).order_by("id desc")
     def add_logsss(self,logsss_model):
         is_success = False
         try:
