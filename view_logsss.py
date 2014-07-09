@@ -4,6 +4,44 @@ import unittest
 from model_logsss import M_Logsss, db
 from datetime import datetime
 
+class Content_tags():
+    CONTENT_TAGS = {1:'emacs',\
+                        2:'test',\
+                        }
+    def __init__(self):
+        pass
+    def trans_tags(self, tag_indexes):
+        tag_indexes = tuple(tag_indexes)
+        return [self.CONTENT_TAGS.get(t) for t in tag_indexes]
+    def get_tag(self, index):
+        return self.CONTENT_TAGS.get(index)
+    def get_all_tags(self):
+        return self.CONTENT_TAGS.values()
+    def get_all(self):
+        return self.CONTENT_TAGS
+
+class Test_Content_tags(unittest.TestCase):
+    def setUp(self):
+        self.t = Content_tags()
+    def test_trans_tags(self):
+        tags_index = self.t.CONTENT_TAGS.keys()
+        result = self.t.CONTENT_TAGS.values()
+        test_result = self.t.trans_tags(tags_index)
+        self.assertEqual(tuple(result), tuple(test_result))
+    def test_get_tag(self):
+        tags_index = 1
+        result = self.t.CONTENT_TAGS.get(tags_index)
+        test_result = self.t.get_tag(tags_index)
+        self.assertEqual(result, test_result)
+    def test_get_all_tags(self):
+        result = tuple(self.t.CONTENT_TAGS.values())
+        test_result = tuple(self.t.get_all_tags())
+        self.assertEqual(result, test_result)
+    def test_get_all(self):
+        result = self.t.CONTENT_TAGS
+        test_result = self.t.get_all()
+        self.assertEqual(result, test_result)
+
 class Content_status():
     def __init__(self):
         self.draft = 0

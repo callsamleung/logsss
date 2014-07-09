@@ -4,6 +4,7 @@ build for reading Flask, sqlalchemy.
 20140709:
 
 1. list data @ index.html
+2. add class Content_tags @ view_logsss.py
 
 
 20140708:
