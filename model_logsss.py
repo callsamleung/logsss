@@ -1,16 +1,16 @@
 #coding:utf-8
 
 import unittest
+from flask import Flask
+from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import *
 from sqlalchemy.orm import *
-mysql_engine = create_engine('mysql://root:keen@localhost/logsss', encoding = 'utf8', echo = True)
 
-Session = sessionmaker()
-session = Session(bind = mysql_engine)
-from sqlalchemy.ext.declarative import declarative_base
-Base = declarative_base()
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:keen@localhost/logsss'
+db = SQLAlchemy(app)
 
-class M_Logsss(Base):
+class M_Logsss(db.Model):
     __tablename__ = 'logsss'
     id = Column(Integer, primary_key = True)
     id_code = Column(String(50), nullable = False)
@@ -19,5 +19,3 @@ class M_Logsss(Base):
     tags = Column(String(100), nullable = True)
     status = Column(Integer, nullable = False)
     content = Column(Text)
-
-Base.metadata.create_all(mysql_engine)

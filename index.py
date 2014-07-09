@@ -7,6 +7,7 @@ from view_logsss import content_status, Logsss
 from model_logsss import M_Logsss
 
 app = Flask(__name__)
+
 v_logsss = Logsss()
 @app.route('/', methods = ['GET', 'POST'])
 def index():
