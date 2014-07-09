@@ -12,7 +12,7 @@ class Content_tags():
         pass
     def trans_tags(self, tag_indexes):
         tag_indexes = tuple(tag_indexes)
-        return [self.CONTENT_TAGS.get(t) for t in tag_indexes]
+        return [self.CONTENT_TAGS.get(int(t)) for t in tag_indexes]
     def get_tag(self, index):
         return self.CONTENT_TAGS.get(index)
     def get_all_tags(self):
@@ -24,10 +24,15 @@ class Test_Content_tags(unittest.TestCase):
     def setUp(self):
         self.t = Content_tags()
     def test_trans_tags(self):
-        tags_index = self.t.CONTENT_TAGS.keys()
-        result = self.t.CONTENT_TAGS.values()
+        tags_index = '1'.split(',')
+        result = [self.t.CONTENT_TAGS.get(int(i)) for i in tags_index]
         test_result = self.t.trans_tags(tags_index)
         self.assertEqual(tuple(result), tuple(test_result))
+        tags_index = '1,2'.split(',')
+        result = [self.t.CONTENT_TAGS.get(int(i)) for i in tags_index]
+        test_result = self.t.trans_tags(tags_index)
+        self.assertEqual(tuple(result), tuple(test_result))
+
     def test_get_tag(self):
         tags_index = 1
         result = self.t.CONTENT_TAGS.get(tags_index)
