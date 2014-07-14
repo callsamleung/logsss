@@ -5,8 +5,10 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from view_logsss import content_status, Logsss, Content_tags
 from model_logsss import M_Logsss
+from lgs_content.lgs_index import lgs_index
 
 app = Flask(__name__)
+app.register_blueprint(lgs_index)
 content_tags = Content_tags()
 v_logsss = Logsss()
 @app.route('/', methods = ['GET', 'POST'])

@@ -19,6 +19,8 @@ class Content_tags():
         return self.CONTENT_TAGS.values()
     def get_all(self):
         return self.CONTENT_TAGS
+    def validate_value(self, tags_value):
+        return tags_value in self.CONTENT_TAGS.values()
 
 class Test_Content_tags(unittest.TestCase):
     def setUp(self):
@@ -32,7 +34,13 @@ class Test_Content_tags(unittest.TestCase):
         result = [self.t.CONTENT_TAGS.get(int(i)) for i in tags_index]
         test_result = self.t.trans_tags(tags_index)
         self.assertEqual(tuple(result), tuple(test_result))
-
+    def test_validate_value(self):
+        tags = 'test'
+        true_result = self.t.validate_value(tags)
+        self.assertTrue(true_result)
+        tags = 'must no exists result'
+        false_result = self.t.validate_value(tags)
+        self.assertFalse(false_result)
     def test_get_tag(self):
         tags_index = 1
         result = self.t.CONTENT_TAGS.get(tags_index)
@@ -68,7 +76,7 @@ class Logsss():
         get_item
         get_recorders
         add_logsss
-        
+        get_recorders_with
     '''
     def __init__(self):
         pass
@@ -82,6 +90,8 @@ class Logsss():
         return recorder
     def get_recorders(self):
         return db.session.query(M_Logsss).order_by("id desc")
+    def get_recorders_with(self, tags):
+        return db.session.query(M_Logsss).filter(M_Logsss.tags.like(tags)).order_by('id desc')
     def add_logsss(self,logsss_model):
         is_success = False
         try:
@@ -91,6 +101,7 @@ class Logsss():
         except:
             is_success = False
         return is_success
+
             
 
 class Test_Logsss(unittest.TestCase):
@@ -127,6 +138,19 @@ class Test_Logsss(unittest.TestCase):
         r = self.l.get_recorders()
         r = r.all()
         self.assertTrue(len(r) > 0)
+    def test_get_recorders_with(self):
+        tags = 'test,emacs'
+        new_obj = M_Logsss(id_code = 'adfjkwqeflwqelfjl', update_at = datetime.now(),\
+                               create_at = datetime.now(),\
+                               tags = tags,\
+                               status = content_status.draft,\
+                               content = 'content_test')
+        db.session.add(new_obj)
+        db.session.commit()
+        identity = new_obj.id
+        result = [o.id for o in self.l.get_recorders_with(tags)]
+        self.assertTrue(identity in result)
+        
 
 if __name__ == '__main__':
     unittest.main()

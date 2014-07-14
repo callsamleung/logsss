@@ -1,6 +1,11 @@
 ##Logssss
 build for reading Flask, sqlalchemy.
 
+
+20140714:
+1. test blueprint for url('/l') route
+
+
 20140709:
 
 1. list data @ index.html
