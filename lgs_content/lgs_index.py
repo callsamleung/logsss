@@ -13,4 +13,4 @@ def index(tags):
         content_items = v_logsss.get_recorders_with(tags)[:5]
     else:
         content_items = v_logsss.get_recorders()[:5]
-    return render_template('lgs_index.html', content_items = content_items)
+    return render_template('lgs_content/lgs_index2.html', content_items = content_items)
