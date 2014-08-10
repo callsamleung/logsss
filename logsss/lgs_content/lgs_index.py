@@ -1,6 +1,6 @@
 #coding:utf-8
 from flask import Blueprint, render_template, abort
-from .view_logsss import Logsss
+from ..view_logsss import Logsss
 
 v_logsss  = Logsss()
 
