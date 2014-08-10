@@ -19,6 +19,9 @@ setup(name='logsss',
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          'Flask',
+          'Flask-Testing',
+          'Flask-sqlalchemy',
       ],
       entry_points="""
       # -*- Entry points: -*-
