@@ -2,17 +2,16 @@
 
 from datetime import datetime
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash
+     render_template, flash, Blueprint
 from view_logsss import content_status, Logsss, Content_tags
 from model_logsss import M_Logsss
-from lgs_content.lgs_index import lgs_index
 
-app = Flask(__name__)
-app.register_blueprint(lgs_index)
 content_tags = Content_tags()
 v_logsss = Logsss()
-@app.route('/', methods = ['GET', 'POST'])
-def index():
+home_index = Blueprint('home_index', __name__)
+
+@home_index.route('/', methods = ['GET', 'POST'])
+def home():
     if request.method == 'GET':
         content_items = v_logsss.get_recorders()[:5]
         tags = content_tags.get_all()
@@ -26,7 +25,7 @@ def index():
                                    status = status,\
                                    content = request.form['content'])
         if v_logsss.add_logsss(new_obj):
-            return redirect(url_for('index'))
+            return redirect(url_for('home_index.home'))
         else:
             return 'commit error'
     return 'nothing here'

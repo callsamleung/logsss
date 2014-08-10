@@ -2,6 +2,11 @@
 
 build for reading Flask, sqlalchemy.
 
+##LICENSE
+
+MIT
+
+
 ##HOW TO USE
 
 BEFORE:
@@ -12,10 +17,18 @@ THEN:
 
 1. git clone https://github.com/callsamleung/logsss
 2. cd logsss
-3. python db.init.py (your will see ok)
-4. python index.py
+3. python setup.py develop (maybe permission use sudo)
+4. python logsss/db.init.py (your will see ok)
+4. python run.py
 
 ##CHANGLOG
+
+2014/08/10 23:37:14:
+
+1. add setup.py 
+2. update HOW TO USE
+3. use blueprint at home_index.py
+
 
 20140714:
 
