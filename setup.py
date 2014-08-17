@@ -19,6 +19,7 @@ setup(name='logsss',
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          'MySQL-python',
           'Flask',
           'Flask-Testing',
           'Flask-SQLAlchemy',
