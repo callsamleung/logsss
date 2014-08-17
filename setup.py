@@ -21,7 +21,7 @@ setup(name='logsss',
           # -*- Extra requirements: -*-
           'Flask',
           'Flask-Testing',
-          'Flask-sqlalchemy',
+          'Flask-SQLAlchemy',
       ],
       entry_points="""
       # -*- Entry points: -*-
